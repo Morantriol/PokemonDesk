@@ -1,26 +1,22 @@
 import React from 'react';
 
 import s from './Button.module.scss';
+// import cn from "classnames";
 
 interface ButtonProps {
   onClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
-  width: number | string;
   color: string;
-  height: number | string;
-  fontSize: string;
+  size: string;
 }
 
-const Button: React.FC<ButtonProps> = ({ children, onClick, width, color, height, fontSize }) => {
+const Button: React.FC<ButtonProps> = ({ children, onClick, color, size }) => {
   return (
     <button
       type="button"
-      className={s.root}
+      className={s[size as keyof typeof s]}
       onClick={onClick}
       style={{
-        width: `${width}`,
-        background: `${color}`,
-        height: `${height}`,
-        fontSize: `${fontSize}`,
+        background: color,
       }}>
       {children}
     </button>

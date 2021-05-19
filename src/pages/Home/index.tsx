@@ -1,8 +1,11 @@
+import { navigate } from 'hookrouter';
 import React from 'react';
 import Button from '../../components/Button';
 import Header from '../../components/Header';
+import Heading from '../../components/Heading';
 import Layout from '../../components/Layout';
 import Parallax from '../../components/Parallax';
+import { LinkEnum } from '../../routes';
 
 import s from './Home.module.scss';
 
@@ -12,17 +15,17 @@ const HomePage = () => {
       <Header />
       <Layout className={s.contentWrap}>
         <div className={s.contentText}>
-          <h1>
+          <Heading headerRender="1">
             <b>Find</b> all your favorite <b>Pokemon</b>
-          </h1>
-          <h3>You can know the type of Pokemon, its strengths, disadvantages and abilities</h3>
+          </Heading>
+          <Heading headerRender="3">
+            You can know the type of Pokemon, its strengths, disadvantages and abilities
+          </Heading>
           <Button
             // eslint-disable-next-line no-console
-            onClick={() => console.log('Click Button!')}
-            width="231px"
+            onClick={() => navigate(LinkEnum.POKEDEX)}
             color="#73D677"
-            height="66px"
-            fontSize="23px">
+            size="medium">
             See pokemons
           </Button>
         </div>
