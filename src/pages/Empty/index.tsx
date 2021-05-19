@@ -1,12 +1,12 @@
 import React from 'react';
 import Header from '../../components/Header';
-// import PokemonCard from '../../components/PokemonCard';
+// import PokemonCard, { IPokemons } from '../../components/PokemonCard';
 
 interface EmptyPageProps {
   title?: string;
 }
 
-// const pokemons = [
+// const pokemons: Array<IPokemons> = [
 //     {
 //       "name_clean": "bulbasaur",
 //       "abilities": [
@@ -273,17 +273,17 @@ interface EmptyPageProps {
 //     }
 //   ];
 
-const EmptyPage: React.FC<EmptyPageProps> = ({ title }) => {
+const EmptyPage: React.FC<EmptyPageProps> = () => {
   return (
     <div>
       <Header />
       {/* <PokemonCard />
-            {pokemons.map(({ id, name, attack, defense, img, types }) => (
+            {pokemons.map(({ id, name, stats, img, types }) => (
                     <PokemonCard
                         key={id}
                         name={name}
-                        attack={attack}
-                        defense={defense}
+                        attack={stats.attack}
+                        defense={stats.defense}
                         img={img}
                         types={types}
             />
