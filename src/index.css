@@ -15,27 +15,34 @@ h1 {
   font-size: 72px;
   line-height: 84px;
   letter-spacing: 4px;
+  font-weight: normal;
 }
 
 h2 {
   font-size: 64px;
+  font-weight: normal;
 }
 
 h3 {
   font-size: 36px;
   line-height: 42px;
+  font-weight: normal;
 }
 
 h4 {
   font-size: 24px;
+  margin: 0;
+  font-weight: normal;
 }
 
 h5 {
   font-size: 18px;
+  font-weight: normal;
 }
 
 h6 {
   font-size: 12px;
+  font-weight: normal;
 }
 
 p {
