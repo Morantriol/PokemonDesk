@@ -21,7 +21,7 @@ const Header = () => {
               key={title}
               href={link}
               className={cn(s.menuLink, {
-                [s.activeLink]: link === path,
+                [s.activeLink] : link === path
               })}>
               {title}
             </A>
@@ -32,4 +32,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default React.memo(Header);

@@ -1,6 +1,7 @@
 import React from 'react';
 import EmptyPage from './pages/Empty';
 import HomePage from './pages/Home';
+import PokedexPage from './pages/Pokedex';
 
 interface IGeneralMenu {
   title: string;
@@ -25,7 +26,7 @@ export const GENERAL_MENU: IGeneralMenu[] = [
   {
     title: 'Pokédex',
     link: LinkEnum.POKEDEX,
-    component: () => <EmptyPage title="Pokedex" />,
+    component: () => <PokedexPage />,
   },
   {
     title: 'Legendaries',

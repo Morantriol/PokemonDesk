@@ -1,7 +1,7 @@
 import { navigate } from 'hookrouter';
 import React from 'react';
 import { LinkEnum } from '../../routes';
-import Button from '../Button';
+import Button from '../../components/Button';
 import s from './404.module.scss';
 
 import TeamRocket from './assets/teamRocket.png';
