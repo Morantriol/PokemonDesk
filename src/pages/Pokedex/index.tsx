@@ -1,56 +1,50 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import Heading from '../../components/Heading';
 import Layout from '../../components/Layout';
 import PokemonCard from '../../components/PokemonCard';
-import req from '../../utils/request';
+import useData from '../../hook/getData';
+import useDebounce from '../../hook/useDebounce';
+import { IData } from '../../interface/pokemons';
 
 import s from './Pokedex.module.scss';
 
-const usePokemons = () => {
-  const [data, setData] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [isError, setIsError] = useState(false);
+interface IQuery {
+  name?: string;
 
-  useEffect(() => {
-    const getPokemons = async () => {
-      setIsLoading(true);
-      try {
-        const result = await req('getPokemons');
+}
 
-        setData(result);
-      } catch (e) {
-        setIsError(true);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-    getPokemons();
-  }, []);
-
-  return {
-    data,
-    isLoading,
-    isError,
-  };
-};
-
+  
 interface Api {
-    total: number;
-    count: number;
-    limit: number;
-    offset: number;
-    pokemons: [];
+  total: number;
+  count: number;
+  limit: number;
+  offset: number;
+  pokemons: [];
 }
 
 interface PokedexPageProps {
-    data?: Api;
-  }
+  data?: Api;
+}
+
 
 const PokedexPage: React.FC<PokedexPageProps> = () => {
-  const { data, isLoading, isError } = usePokemons();
+  const [searchValue, setSearchValue] = useState('');
+  const [query, setQuery] = useState<IQuery>({});
 
-  if (isLoading) {
-    return <div>Loading...</div>;
+  const debounceValue = useDebounce(searchValue, 500);
+
+  const {
+    data,
+    isLoading,
+    isError
+  } = useData<IData>('getPokemons', query, [debounceValue]);
+
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchValue(e.target.value);
+    setQuery((state: IQuery) => ({
+      ...state,
+      name: e.target.value,
+    }))
   }
 
   if (isError) {
@@ -61,10 +55,13 @@ const PokedexPage: React.FC<PokedexPageProps> = () => {
     <>
       <Layout className={s.root}>
         <Heading headerRender="4" className={s.title}>
-          {data.total} <b>Pokemons</b> for you to choose your favorite
+          {!isLoading && data && data.total} <b>Pokemons</b> for you to choose your favorite
         </Heading>
         <div>
-          {data.pokemons.map((item) => (
+          <input type="text" value={searchValue} onChange={handleSearchChange} />
+        </div>
+        <div>
+          {!isLoading && data && data.pokemons.map((item) => (
             <PokemonCard
                 key={item.id}
                 name={item.name}
