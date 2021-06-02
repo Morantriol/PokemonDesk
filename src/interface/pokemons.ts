@@ -3,7 +3,7 @@ export interface IData {
   pokemons: any[];
 }
 
-const pokemonsData = [
+const pokemonsData =
   {
     name_clean: 'bulbasaur',
     abilities: ['overgrow', 'chlorophyll'],
@@ -17,7 +17,6 @@ const pokemonsData = [
     is_default: true,
     order: 1,
     weight: 69,
-  },
-];
+  }
 
 export type PokemonRequest = typeof pokemonsData;

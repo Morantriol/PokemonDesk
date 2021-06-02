@@ -54,7 +54,7 @@ const PokedexPage: React.FC<PokedexPageProps> = () => {
   return (
     <>
       <Layout className={s.root}>
-        <Heading headerRender="4" className={s.title}>
+        <Heading size='s' className={s.title}>
           {!isLoading && data && data.total} <b>Pokemons</b> for you to choose your favorite
         </Heading>
         <div>
