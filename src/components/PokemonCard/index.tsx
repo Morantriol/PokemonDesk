@@ -273,13 +273,13 @@ const PokemonCard: React.FC<PokemonCardProps> = ({ name, attack, defense, img, t
           </div>
         </div>
         <div className={s.labelWrap}>
-          {types.map((type) => {
+          {/* {types.map((type) => {
             return (
-              <span key={type} className={s[type] as keyof typeof s}>
+              <span key={type} className={s[type]}>
                 {types}
               </span>
             )
-          })}
+          })} */}
         </div>
       </div>
       <div className={s.pictureWrap}>
