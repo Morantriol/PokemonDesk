@@ -1,4 +1,4 @@
-import { config }  from "../config";
+import { configEndpoint }  from "../config";
 
 interface IApiConfigUri {
     host: string,
@@ -16,12 +16,12 @@ interface IEndpoint {
 }
 
 function getUrlWithParamsConfig(endpointConfig: string, params: object) {
-    const { method, uri }: IEndpoint = config.client.endpoint[endpointConfig as keyof typeof config.client.endpoint];
+    const { method, uri }: IEndpoint = configEndpoint.client.endpoint[endpointConfig as keyof typeof configEndpoint.client.endpoint];
 
     let body = {};
 
     const apiConfigUri : IApiConfigUri = {
-        ...config.client.server,
+        ...configEndpoint.client.server,
         ...uri,
         query: {
             ...uri.query

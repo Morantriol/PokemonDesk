@@ -19,4 +19,6 @@ const pokemonsData =
     weight: 69,
   }
 
+export type ITypesRequest = string[];
+
 export type PokemonRequest = typeof pokemonsData;
