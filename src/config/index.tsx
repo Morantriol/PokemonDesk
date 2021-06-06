@@ -15,7 +15,7 @@ export interface IConfig {
     };
 };
   
-export const config: IConfig= {
+export const configEndpoint: IConfig = {
     client: {
         server: {
             protocol: 'http',
@@ -32,10 +32,16 @@ export const config: IConfig= {
               method: 'GET',
               uri: {
                   pathname: '/api/v1/pokemon/{id}',
+              }           
+            },
+            getPokemonTypes: {
+              method: 'GET',
+              uri: {
+                  pathname: '/api/v1/types',
               }
-          },
+            },
         }
     }
 }
 
-export type ConfigEndpointKeyType = keyof typeof config.client.endpoint;
+export type ConfigEndpointKeyType = keyof typeof configEndpoint.client.endpoint;

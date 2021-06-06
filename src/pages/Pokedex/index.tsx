@@ -1,14 +1,18 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import Heading from '../../components/Heading';
 import Layout from '../../components/Layout';
 import PokemonCard from '../../components/PokemonCard';
+import { configEndpoint } from '../../config';
 import useData from '../../hook/getData';
 import useDebounce from '../../hook/useDebounce';
 import { IData } from '../../interface/pokemons';
+import { getTypesAction } from '../../store/pokemon';
 
 import s from './Pokedex.module.scss';
 
 interface IQuery {
+  limit: number
   name?: string;
 
 }
@@ -28,8 +32,12 @@ interface PokedexPageProps {
 
 
 const PokedexPage: React.FC<PokedexPageProps> = () => {
+  const dispatch = useDispatch();
+  const types = useSelector((state) => state.pokemons.types.data);
   const [searchValue, setSearchValue] = useState('');
-  const [query, setQuery] = useState<IQuery>({});
+  const [query, setQuery] = useState<IQuery>({
+    limit: 12
+  });
 
   const debounceValue = useDebounce(searchValue, 500);
 
@@ -37,7 +45,11 @@ const PokedexPage: React.FC<PokedexPageProps> = () => {
     data,
     isLoading,
     isError
-  } = useData<IData>('getPokemons', query, [debounceValue]);
+  } = useData<IData>(configEndpoint.getPokemons, query, [debounceValue]);
+
+  useEffect(() => {
+    dispatch(getTypesAction())
+  }, []);
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchValue(e.target.value);
